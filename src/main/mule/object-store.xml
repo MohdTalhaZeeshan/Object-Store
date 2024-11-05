@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:os="http://www.mulesoft.org/schema/mule/os" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/os http://www.mulesoft.org/schema/mule/os/current/mule-os.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="1d52151e-6e78-4418-9256-3d9e4d6480cc" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<os:object-store name="Object_store" doc:name="Object store" doc:id="b7cf952b-b61a-4e1d-87d0-58657e6d277d" />
+	<flow name="object-storeFlow" doc:id="5cc096ac-8b8e-4bfc-ade0-61595d645b07" >
+		<http:listener doc:name="Listener" doc:id="3a963ad5-2d30-4daa-882d-c31d0b4c1a8d" config-ref="HTTP_Listener_config" path="test"/>
+		<os:store doc:name="Store" doc:id="65235a6b-b67c-48e1-aa1b-3020bef65d72" key="lookUpData" objectStore="Object_store">
+			<os:value ><![CDATA[#[" Welcome to object store "]]]></os:value>
+		</os:store>
+	</flow>
+</mule>
